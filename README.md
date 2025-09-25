@@ -1,66 +1,82 @@
-CryptoGuard is an intelligent machine learning-powered security scanner that automatically detects cryptographic API misuses in source code. Using advanced code embeddings, graph analysis, and data augmentation techniques, CryptoGuard helps developers identify vulnerable cryptographic patterns before they reach production.
-🚀 Key Features
+🔐 CryptoGuard – ML-Powered Vulnerability Detection for C/C++ Code
+CryptoGuard is a hybrid machine learning system that detects security vulnerabilities in C/C++ code snippets. It combines statistical ML models with rule-based pattern matching to identify risky code — making it a powerful tool for static analysis and secure coding.
 
-92% Detection Accuracy - Trained on 3,700+ real-world code examples
-19 Vulnerability Types - Comprehensive coverage of cryptographic misuses
-Random Forest ML Model - Robust classification with 89% F1-score
-Real-time Scanning - Fast analysis of source code files
-User-friendly GUI - Built with PyQt for easy interaction
-AES/RSA Support - Advanced encryption algorithm analysis
+🚀 Features
+✅ ML-based vulnerability prediction using TF-IDF + code length
+
+🧠 Rule-based detection for known dangerous functions (e.g., strcpy, system)
+
+📊 Probability scores with confidence levels (HIGH, MEDIUM, LOW)
+
+🌐 Flask API for easy integration
+
+🖥️ Frontend interface for submitting code snippets
 
 
-📊 Performance Metrics
-MetricScoreAccuracy92%F1-Score89%Training Dataset50,000+ code commitsTest Dataset3,700+ examplesVulnerability Types19 categories
-🛠️ Tech Stack
+📁 Dataset
+Used a curated dataset of C/C++ code snippets labeled as vulnerable or safe:
 
-Python 3.8+ - Core development language
-scikit-learn - Machine learning framework
-PyQt5/6 - Desktop GUI framework
-pandas - Data manipulation and analysis
-NumPy - Numerical computing
-matplotlib/seaborn - Data visualization
+cleaned_vulnerabilities.csv
 
-🔍 Detected Vulnerability Types
-CryptoGuard identifies 19 types of cryptographic misuses:
+Preprocessed to remove duplicates, normalize labels, and extract features
 
-Weak Encryption Algorithms (DES, RC4)
-Insecure Random Number Generation
-Hard-coded Cryptographic Keys
-Improper Certificate Validation
-Weak Hash Functions (MD5, SHA1)
-Insecure Key Storage
-Poor Salt Generation
-Inadequate Key Lengths
-ECB Mode Usage
-Predictable IVs
-Missing Padding
-Insecure Key Exchange
-Weak Password Hashing
-Certificate Pinning Issues
-TLS/SSL Misconfigurations
-Cryptographic Nonce Reuse
-Improper HMAC Usage
-Weak Digital Signatures
-Side-channel Vulnerabilities
 
-📈 Machine Learning Details
-Model Architecture
+🧠 Model Training
+TF-IDF vectorization of code
 
-Algorithm: Random Forest Classifier
-Features: Code embeddings, AST patterns, API usage graphs
-Training Data: 50,000+ commit samples from open-source repositories
-Validation: K-fold cross-validation with stratified sampling
+Logistic Regression, Random Forest, and Gradient Boosting models tested
 
-Data Augmentation Techniques
+Final model selected based on F1-score and saved as best_model.pkl
 
-Syntactic Variations: Code formatting changes
-Semantic Preserving: Variable renaming
-API Pattern Extraction: Function call graph analysis
-Contextual Embeddings: Code2Vec representations
 
-Performance Optimization
+🛠️ How It Works
+User submits code snippet
 
-Feature Selection: Information gain and correlation analysis
-Hyperparameter Tuning: Grid search with cross-validation
-Model Ensemble: Multiple classifier voting
-Threshold Optimization: Precision-recall curve analysis
+Backend transforms code using TF-IDF + length
+
+Model predicts vulnerability probability
+
+Rule-based patterns checked
+
+Final decision returned with confidence level
+
+
+📦 Installation
+bash
+git clone https://github.com/Bavithbabu/cryptoguard.git
+cd cryptoguard/Cryptoguard
+pip install -r requirements.txt
+python app.py
+
+
+📬 API Usage
+POST /predict
+
+json
+{
+  "code": "char buffer[10]; strcpy(buffer, input);"
+}
+
+
+Response:
+
+json
+{
+  "is_vulnerable": true,
+  "probability": 0.82,
+  "confidence": "HIGH",
+  "vulnerability_types": ["buffer_overflow"]
+}
+
+
+
+💡 Future Improvements
+Add SHAP explainability
+
+Improve frontend UI
+
+Expand dataset with real-world exploits
+
+Add feedback loop for retraining
+
+
