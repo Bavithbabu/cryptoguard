@@ -21,12 +21,15 @@ cleaned_vulnerabilities.csv
 Preprocessed to remove duplicates, normalize labels, and extract features
 
 
+
+
 🧠 Model Training
 TF-IDF vectorization of code
 
 Logistic Regression, Random Forest, and Gradient Boosting models tested
 
 Final model selected based on F1-score and saved as best_model.pkl
+
 
 
 🛠️ How It Works
@@ -41,14 +44,18 @@ Rule-based patterns checked
 Final decision returned with confidence level
 
 
+
 📦 Installation
 bash
 
 git clone https://github.com/Bavithbabu/cryptoguard.git
 
 cd cryptoguard/Cryptoguard
+
 pip install -r requirements.txt
+
 python app.py
+
 
 
 📬 API Usage
@@ -56,8 +63,10 @@ POST /predict
 
 json
 {
-  "code": "char buffer[10]; strcpy(buffer, input);"
+  "code": "char buffer[10];
+  strcpy(buffer, input);"
 }
+
 
 
 Response:
@@ -65,8 +74,11 @@ Response:
 json
 {
   "is_vulnerable": true,
+  
   "probability": 0.82,
+  
   "confidence": "HIGH",
+  
   "vulnerability_types": ["buffer_overflow"]
 }
 
