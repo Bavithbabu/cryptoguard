@@ -43,7 +43,9 @@ Final decision returned with confidence level
 
 📦 Installation
 bash
+
 git clone https://github.com/Bavithbabu/cryptoguard.git
+
 cd cryptoguard/Cryptoguard
 pip install -r requirements.txt
 python app.py
